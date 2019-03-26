@@ -5,7 +5,13 @@ import Onboarding from "./Onboarding";
 import Home from "./Home";
 
 class App extends Component {
+  navigate() {
+    this.props.history.push("onboarding");
+  }
+
   render() {
+    this.navigate();
+
     return (
       <div>
         <BrowserRouter>

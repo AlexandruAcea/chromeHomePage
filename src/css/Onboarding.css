@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  color: white;
+  height: vh;
+  background: black;
+}
+
+#nextBtn {
+  text-align: center;
+  margin-top: 20%;
+  font-size: 33px;
+  text-decoration: underline;
+  transition: 0.3s;
+}
+
+#nextBtn:hover {
+  color: lightgray;
+  transition: 0.3s;
+}

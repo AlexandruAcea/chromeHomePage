@@ -1,11 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import "../css/Home.css";
 
 const Home = () => {
   return (
-    <div>
+    <div className="containerHome">
       <h1>hello</h1>
-      <Link to="/onboarding">click here</Link>
     </div>
   );
 };

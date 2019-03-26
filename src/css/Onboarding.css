@@ -3,15 +3,26 @@
   padding: 0;
 }
 
+.containerOnboarding {
+  color: white;
+  height: 100%;
+  width: 100%;
+  background: black;
+}
+
 .container {
   color: white;
-  height: vh;
+  height: 60%;
+  width: 100%;
   background: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #nextBtn {
   text-align: center;
-  margin-top: 20%;
   font-size: 33px;
   text-decoration: underline;
   transition: 0.3s;
@@ -20,4 +31,67 @@
 #nextBtn:hover {
   color: lightgray;
   transition: 0.3s;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  width: 450px;
+  margin-top: 20%;
+  background: #000;
+  color: #fff;
+  font-size: 30px;
+  border: 0;
+  outline: none;
+}
+
+.line {
+  width: 450px;
+  height: 4px;
+  background: #fff;
+  margin-top: 10px;
+}
+
+#subtitle {
+  color: #919191;
+  font-size: 14px;
+}
+
+.list {
+  color: #919191;
+  font-size: 20px;
+  column-count: 2;
+  margin-top: 70px;
+  width: 350px;
+  padding-left: 90px;
+  cursor: pointer;
+}
+
+li {
+  list-style-type: none;
+  margin-bottom: 20px;
+}
+
+.true {
+  color: white;
+  transition: 0.3s;
+}
+
+.false {
+  color: #919191;
+  transition: 0.3s;
+}
+
+h1 {
+  text-align: center;
+}
+
+p {
+  font-size: 14px;
+  color: #919191;
+  margin-bottom: 20px;
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import "../../css/OnboardingPages/Page1.css";
 
 const Page1 = () => {
   return (

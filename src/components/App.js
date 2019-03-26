@@ -8,10 +8,11 @@ class App extends Component {
   render() {
     //Push user to Onboarding
     //Needs conditional stuff
-    this.props.history.push("/onboarding");
+
+    //this.props.history.push("/onboarding");
 
     return (
-      <div className="container">
+      <div>
         <BrowserRouter>
           <Switch>
             <Route path="/" exact component={Home} />

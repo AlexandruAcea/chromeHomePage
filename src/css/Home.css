@@ -1,3 +1,61 @@
-h1 {
+* {
+  margin: 0;
+}
+
+#titleMain {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
+  font-size: 30px;
   color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+.containerHome {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: url("../assets/photo1.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#background {
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  opacity: 0.3;
+}
+
+#photographer {
+  font-size: 3em;
+  color: white;
+  position: absolute;
+  bottom: 70px;
+  left: 70px;
+  font-size: 25px;
+  font-family: "Roboto", sans-serif;
+}
+
+#nameOfPhotographer {
+  font-size: 15px;
+  position: absolute;
+  bottom: 30px;
+  left: 70px;
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+.actions {
+  font-size: 1em;
+  color: white;
+  font-family: "Lato", sans-serif;
+  position: absolute;
+  bottom: 80px;
+  right: 70px;
+  display: flex;
+  flex-direction: row;
 }

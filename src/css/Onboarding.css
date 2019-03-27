@@ -8,24 +8,45 @@
   height: 100%;
   width: 100%;
   background: black;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
   color: white;
-  height: 60%;
+  flex: 2;
   width: 100%;
   background: black;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.container3 {
+  color: white;
+  flex: 3;
+  width: 100%;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.containerInside {
+  position: absolute;
+  bottom: 0;
 }
 
 #nextBtn {
+  flex: 2;
+  margin-top: 100px;
   text-align: center;
   font-size: 33px;
   text-decoration: underline;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 #nextBtn:hover {
@@ -59,6 +80,7 @@ input {
 #subtitle {
   color: #919191;
   font-size: 14px;
+  text-align: center;
 }
 
 .list {
@@ -94,4 +116,8 @@ p {
   font-size: 14px;
   color: #919191;
   margin-bottom: 20px;
+}
+
+#title3 {
+  margin-top: 10%;
 }

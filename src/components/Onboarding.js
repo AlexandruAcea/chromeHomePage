@@ -9,6 +9,7 @@ class Onboarding extends Component {
   state = {
     buttonText: "next",
     currentPage: 1,
+    finish: false,
     categoryList: [
       { title: "architecture", selected: "false" },
       { title: "art", selected: "false" },
@@ -47,11 +48,13 @@ class Onboarding extends Component {
   renderSteps(currentPage) {
     switch (currentPage) {
       case 1:
+        console.log("You are at" + this.state.currentPage);
         return <Page1 />;
-
       case 2:
+        console.log("You are at" + this.state.currentPage);
         return <Page2 />;
       case 3:
+        console.log("You are at" + this.state.currentPage);
         return (
           <Page3
             dataSet={this.state.categoryList}
@@ -59,19 +62,32 @@ class Onboarding extends Component {
           />
         );
       case 4:
+        console.log("You are at" + this.state.currentPage);
         return <Page4 />;
 
       case 5:
-        this.props.history.push("/");
-        break;
-      default:
-      //can't do shit
+        console.log("You are at" + this.state.currentPage);
     }
   }
 
   nextStep() {
     if (this.state.currentPage === 2) buttonText = "or skip for now";
     if (this.state.currentPage === 3) buttonText = "open my new tab";
+
+    if (this.state.currentPage === 4) {
+      const { cookies } = this.props;
+
+      var queries = "";
+      for (var item in this.props.categoryList) {
+        queries = queries + " " + item.title;
+      }
+
+      if (this.state.currentPage === 4) {
+        cookies.set("queries", queries, { path: "/" });
+      }
+      this.props.history.push("/");
+      this.setState({ finish: true });
+    }
 
     this.setState({
       buttonText: buttonText,

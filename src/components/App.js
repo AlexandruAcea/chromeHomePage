@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Onboarding from "./Onboarding";
 import Home from "./Home";
+import { withCookies } from "react-cookie";
 
 class App extends Component {
   render() {
@@ -15,8 +16,25 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/onboarding" component={Onboarding} />
+            <Route
+              path="/"
+              exact
+              render={() => (
+                <Home
+                  cookies={this.props.cookies}
+                  history={this.props.history}
+                />
+              )}
+            />
+            <Route
+              path="/onboarding"
+              render={() => (
+                <Onboarding
+                  cookies={this.props.cookies}
+                  history={this.props.history}
+                />
+              )}
+            />
           </Switch>
         </BrowserRouter>
       </div>
@@ -24,4 +42,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withCookies(App);

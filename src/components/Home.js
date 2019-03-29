@@ -4,7 +4,7 @@ import "../css/Home.css";
 
 class Home extends Component {
   state = {
-    query: "lambo",
+    query: "forest",
     photoList: [],
     backgroundImage: "../assets/photo1.jpg"
   };

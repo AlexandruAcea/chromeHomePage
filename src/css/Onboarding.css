@@ -40,12 +40,18 @@
 }
 
 #nextBtn {
-  flex: 2;
-  margin-top: 100px;
   text-align: center;
   text-decoration: underline;
   transition: 0.3s;
   cursor: pointer;
+}
+
+.buttonDiv {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #nextBtn:hover {
@@ -60,7 +66,7 @@ form {
 }
 
 input {
-  width: 450px;
+  width: 400px;
   margin-top: 10%;
   background: #000;
   color: #fff;
@@ -84,9 +90,9 @@ input {
 
 .list {
   color: #919191;
-  font-size: 20px;
+  font-size: 1em;
   column-count: 2;
-  margin-top: 70px;
+  margin-top: 50px;
   width: 350px;
   padding-left: 90px;
   cursor: pointer;
@@ -94,7 +100,7 @@ input {
 
 li {
   list-style-type: none;
-  margin-bottom: 20px;
+  margin-bottom: 5%;
 }
 
 .true {

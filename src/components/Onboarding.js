@@ -100,9 +100,11 @@ class Onboarding extends Component {
       <div className="containerOnboarding">
         {this.renderSteps(this.state.currentPage)}
 
-        <h1 id="nextBtn" onClick={this.nextStep.bind(this)}>
-          {this.state.buttonText}
-        </h1>
+        <div className="buttonDiv">
+          <h1 id="nextBtn" onClick={this.nextStep.bind(this)}>
+            {this.state.buttonText}
+          </h1>
+        </div>
       </div>
     );
   }

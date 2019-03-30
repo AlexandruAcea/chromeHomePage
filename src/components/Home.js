@@ -4,9 +4,11 @@ import "../css/Home.css";
 
 class Home extends Component {
   state = {
-    query: "forest",
+    query: "apple",
     photoList: [],
-    backgroundImage: "../assets/photo1.jpg"
+    backgroundImage: "../assets/photo1.jpg",
+    photographer: "",
+    link: ""
   };
 
   componentDidMount() {
@@ -28,9 +30,12 @@ class Home extends Component {
     )
       .then(res => res.json())
       .then(json => {
+        console.log(json.results);
         this.setState({
           photoList: json,
-          backgroundImage: json.results[3].urls.full
+          backgroundImage: json.results[2].urls.full,
+          photographer: json.results[2].user.name,
+          link: json.results[2].user.links.html
         });
       });
   }
@@ -44,9 +49,17 @@ class Home extends Component {
         }}
       >
         <div id="background" />
+
+        <h1 id="quote">
+          "The only way to do great work is to love what you do."
+        </h1>
+
         <h1 id="titleMain">good morning, ace.</h1>
         <h1 id="photographer">photographer</h1>
-        <p id="nameOfPhotographer">Alexandru Acea</p>
+
+        <a href={this.state.link}>
+          <p id="nameOfPhotographer">{this.state.photographer}</p>
+        </a>
       </div>
     );
   }

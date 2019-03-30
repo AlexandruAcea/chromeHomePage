@@ -1,31 +1,20 @@
 import { Page1, Page2, Page3, Page4 } from "./OnboardingFiles";
+import { TABS } from "../types";
+import { withRouter } from "react-router-dom";
+import Cookies from "universal-cookie";
 import React, { Component } from "react";
 import "../css/Onboarding.css";
 
 var select = 0;
 var buttonText = "next";
+var queries = "";
+const cookies = new Cookies();
 
 class Onboarding extends Component {
   state = {
     buttonText: "next",
     currentPage: 1,
-    finish: false,
-    categoryList: [
-      { title: "architecture", selected: "false" },
-      { title: "art", selected: "false" },
-      { title: "photography", selected: "false" },
-      { title: "black", selected: "false" },
-      { title: "color", selected: "false" },
-      { title: "landscape", selected: "false" },
-      { title: "artistic", selected: "false" },
-      { title: "nature", selected: "false" },
-      { title: "mountains", selected: "false" },
-      { title: "design", selected: "false" },
-      { title: "fashion", selected: "false" },
-      { title: "sunset", selected: "false" },
-      { title: "moutains", selected: "false" },
-      { title: "snow", selected: "false" }
-    ]
+    categoryList: TABS
   };
 
   handleListClick(i) {
@@ -48,13 +37,10 @@ class Onboarding extends Component {
   renderSteps(currentPage) {
     switch (currentPage) {
       case 1:
-        console.log("You are at" + this.state.currentPage);
         return <Page1 />;
       case 2:
-        console.log("You are at" + this.state.currentPage);
         return <Page2 />;
       case 3:
-        console.log("You are at" + this.state.currentPage);
         return (
           <Page3
             dataSet={this.state.categoryList}
@@ -62,31 +48,26 @@ class Onboarding extends Component {
           />
         );
       case 4:
-        console.log("You are at" + this.state.currentPage);
         return <Page4 />;
-
-      case 5:
-        console.log("You are at" + this.state.currentPage);
+      default:
     }
   }
 
   nextStep() {
     if (this.state.currentPage === 2) buttonText = "or skip for now";
-    if (this.state.currentPage === 3) buttonText = "open my new tab";
+
+    if (this.state.currentPage === 3) {
+      buttonText = "open my new tab";
+
+      for (var i = 0; i < this.state.categoryList.length; i++)
+        if (this.state.categoryList[i].selected === "true")
+          if (queries === "") queries = this.state.categoryList[i].title;
+          else queries = queries + "," + this.state.categoryList[i].title;
+    }
 
     if (this.state.currentPage === 4) {
-      const { cookies } = this.props;
-
-      var queries = "";
-      for (var item in this.props.categoryList) {
-        queries = queries + " " + item.title;
-      }
-
-      if (this.state.currentPage === 4) {
-        cookies.set("queries", queries, { path: "/" });
-      }
+      cookies.set("queries", queries, { path: "/" });
       this.props.history.push("/");
-      this.setState({ finish: true });
     }
 
     this.setState({
@@ -96,6 +77,9 @@ class Onboarding extends Component {
   }
 
   render() {
+    if (typeof cookies.get("queries") !== "undefined")
+      this.props.history.push("/");
+
     return (
       <div className="containerOnboarding">
         {this.renderSteps(this.state.currentPage)}
@@ -110,4 +94,4 @@ class Onboarding extends Component {
   }
 }
 
-export default Onboarding;
+export default withRouter(Onboarding);

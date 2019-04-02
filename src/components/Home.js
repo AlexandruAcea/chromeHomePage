@@ -4,6 +4,7 @@ import Cookies from "universal-cookie";
 import { withRouter } from "react-router-dom";
 import "../css/Home.css";
 import gearIcon from "../assets/gear.svg";
+import Settings from "./Settings";
 
 const cookies = new Cookies();
 
@@ -13,7 +14,8 @@ class Home extends Component {
     photoList: [],
     backgroundImage: "../assets/photo1.jpg",
     photographer: "",
-    link: ""
+    link: "",
+    showSettings: false
   };
 
   componentDidMount() {
@@ -28,7 +30,7 @@ class Home extends Component {
       { method: "get" }
     ).then(res =>
       res.json().then(json => {
-        const data = json.results[5];
+        const data = json.results[2];
 
         this.setState({
           photoList: json,
@@ -40,7 +42,16 @@ class Home extends Component {
     );
   }
 
+  handleSettingsClick() {
+    const { showSettings } = this.state;
+
+    if (!showSettings) {
+      this.setState({ showSettings: !showSettings });
+    } else this.setState({ showSettings: !showSettings });
+  }
+
   render() {
+    const { showSettings } = this.state;
     return (
       <div
         className="containerHome"
@@ -54,6 +65,8 @@ class Home extends Component {
           "The only way to do great work is to love what you do."
         </h1>
 
+        <Settings show={showSettings} />
+
         <h1 id="titleMain">good morning, ace.</h1>
 
         <div className="bottomLeft">
@@ -62,10 +75,12 @@ class Home extends Component {
             <p id="nameOfPhotographer">{this.state.photographer}</p>
           </a>
         </div>
-
-        <a>
-          <object id="gear" type="image/svg+xml" data={gearIcon} />
-        </a>
+        <img
+          src={gearIcon}
+          id="gear"
+          alt="settings"
+          onClick={this.handleSettingsClick.bind(this)}
+        />
       </div>
     );
   }

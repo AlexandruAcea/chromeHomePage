@@ -1,0 +1,40 @@
+.containerSettings {
+  width: 35rem;
+  height: 30rem;
+  background: black;
+  position: absolute;
+  right: 10px;
+  bottom: 50px;
+  z-index: 12;
+  display: flex;
+  flex-direction: row;
+
+  border-radius: 5px;
+
+  transition: all 0.5s;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.containerSettings.show {
+  opacity: 0.9;
+  visibility: visible;
+  transform: translate(0px, -20px);
+}
+
+.contentLeft {
+  color: white;
+  flex: 1;
+  border-right: 0.5px solid rgba(255, 255, 255, 0.5);
+  padding-top: 30px;
+}
+
+.settingsListItem {
+  font-size: 18px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+}
+
+.contentRight {
+  flex: 2;
+}

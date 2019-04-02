@@ -3,6 +3,7 @@ import { UNSPLASH_ID } from "../types";
 import Cookies from "universal-cookie";
 import { withRouter } from "react-router-dom";
 import "../css/Home.css";
+import gearIcon from "../assets/gear.svg";
 
 const cookies = new Cookies();
 
@@ -27,11 +28,13 @@ class Home extends Component {
       { method: "get" }
     ).then(res =>
       res.json().then(json => {
+        const data = json.results[5];
+
         this.setState({
           photoList: json,
-          backgroundImage: json.results[2].urls.full,
-          photographer: json.results[2].user.name,
-          link: json.results[2].user.links.html
+          backgroundImage: data.urls.full,
+          photographer: data.user.name,
+          link: data.user.links.html
         });
       })
     );
@@ -52,10 +55,16 @@ class Home extends Component {
         </h1>
 
         <h1 id="titleMain">good morning, ace.</h1>
-        <h1 id="photographer">photographer</h1>
 
-        <a href={this.state.link}>
-          <p id="nameOfPhotographer">{this.state.photographer}</p>
+        <div className="bottomLeft">
+          <h1 id="photographer">photographer</h1>
+          <a href={this.state.link}>
+            <p id="nameOfPhotographer">{this.state.photographer}</p>
+          </a>
+        </div>
+
+        <a>
+          <object id="gear" type="image/svg+xml" data={gearIcon} />
         </a>
       </div>
     );

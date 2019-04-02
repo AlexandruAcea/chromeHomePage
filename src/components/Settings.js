@@ -11,8 +11,30 @@ class Settings extends Component {
     ]
   };
 
-  handleListClick() {
-    console.log("hello");
+  handleListClick(item, i) {
+    const { dataSet } = this.state;
+
+    if (!item.selected) {
+      dataSet.forEach(item => {
+        item.selected = false;
+      });
+      dataSet[i].selected = true;
+    }
+
+    this.setState({ dataSet: dataSet });
+  }
+
+  handleListClickTest() {
+    const { dataSet } = this.state;
+    for (var i = 0; i < dataSet.length; i++)
+      if (dataSet[i].selected)
+        switch (dataSet[i].title) {
+          case "Image":
+            return <ImagesPage />;
+          case "Quote":
+          case "About":
+          default:
+        }
   }
 
   render() {
@@ -23,14 +45,19 @@ class Settings extends Component {
 
     return (
       <div className={componentClasses.join(" ")}>
+        <div className="contentRight">{this.handleListClickTest()}</div>
         <div className="contentLeft">
           <ul className="settingsList">
             {dataSet.map((item, i) => {
               return (
                 <li
                   key={i}
-                  className="settingsListItem"
-                  onClick={this.handleListClick.bind(this)}
+                  className={
+                    this.state.dataSet[i].selected
+                      ? "settingsListItemActive"
+                      : "settingsListItem"
+                  }
+                  onClick={this.handleListClick.bind(this, item, i)}
                 >
                   {item.title}
                 </li>
@@ -40,8 +67,6 @@ class Settings extends Component {
         </div>
 
         <div id="divider" />
-
-        <div className="contentRight">awd</div>
       </div>
     );
   }

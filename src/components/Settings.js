@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../css/Settings.css";
 import { ImagesPage } from "./SettingsFiles";
+import AppProvider from "./AppProvider";
 
 class Settings extends Component {
   state = {
@@ -44,30 +45,32 @@ class Settings extends Component {
     if (this.props.show) componentClasses.push("show");
 
     return (
-      <div className={componentClasses.join(" ")}>
-        <div className="contentRight">{this.handleListClickTest()}</div>
-        <div className="contentLeft">
-          <ul className="settingsList">
-            {dataSet.map((item, i) => {
-              return (
-                <li
-                  key={i}
-                  className={
-                    this.state.dataSet[i].selected
-                      ? "settingsListItemActive"
-                      : "settingsListItem"
-                  }
-                  onClick={this.handleListClick.bind(this, item, i)}
-                >
-                  {item.title}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+      <AppProvider>
+        <div className={componentClasses.join(" ")}>
+          <div className="contentRight">{this.handleListClickTest()}</div>
+          <div className="contentLeft">
+            <ul className="settingsList">
+              {dataSet.map((item, i) => {
+                return (
+                  <li
+                    key={i}
+                    className={
+                      this.state.dataSet[i].selected
+                        ? "settingsListItemActive"
+                        : "settingsListItem"
+                    }
+                    onClick={this.handleListClick.bind(this, item, i)}
+                  >
+                    {item.title}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
 
-        <div id="divider" />
-      </div>
+          <div id="divider" />
+        </div>
+      </AppProvider>
     );
   }
 }

@@ -1,7 +1,7 @@
 .containerSettings {
   width: 35rem;
   height: 30rem;
-  background: black;
+  background-color: rgba(0, 0, 0, 0.9);
   position: absolute;
   right: 10px;
   bottom: 50px;
@@ -17,7 +17,7 @@
 }
 
 .containerSettings.show {
-  opacity: 0.9;
+  opacity: 1;
   visibility: visible;
   transform: translate(0px, -20px);
 }
@@ -49,8 +49,44 @@
 
 .contentRight {
   flex: 2;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
   color: white;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.ulPhotoList {
+  position: relative;
+  height: 400px;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  column-count: 2;
+}
+
+#photosTitle {
+  text-align: left;
+}
+
+.photoListItem {
+}
+
+.photoListItem img {
+  width: 150px;
+  height: 100px;
+  opacity: 100;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }

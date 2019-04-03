@@ -65,7 +65,7 @@ class Home extends Component {
           "The only way to do great work is to love what you do."
         </h1>
 
-        <Settings show={showSettings} />
+        <Settings photoList={this.state.photoList} show={showSettings} />
 
         <h1 id="titleMain">good morning, ace.</h1>
 

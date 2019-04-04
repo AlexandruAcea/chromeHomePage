@@ -52,7 +52,7 @@
   padding-top: 260px;
   position: relative;
   display: flex;
-  overflow-y: auto;
+  overflow: scroll;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -70,8 +70,9 @@ h1 {
 .ulPhotoList {
   position: relative;
   width: 100%;
-
+  overflow-y: scroll;
   column-count: 2;
+  min-height: 558px;
 }
 
 #photosTitle {
@@ -81,9 +82,11 @@ h1 {
 }
 
 .photoListItem {
+  border: 0;
 }
 
 .photoListItem img {
+  border-radius: 5px;
   width: 150px;
   height: 100px;
   opacity: 100;

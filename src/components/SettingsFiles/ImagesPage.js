@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import Context from "../Context";
+import bg from "../../assets/transparent.png";
 
 const ImagesPage = () => {
   const value = useContext(Context);
-  const list = value.photoList.results;
+  console.log(value);
+
+  const list = value.state.photoList.results;
 
   function renderList() {
     if (typeof list !== "undefined")
@@ -17,7 +20,7 @@ const ImagesPage = () => {
               <input
                 type="text"
                 //value={this.state.value}
-                //onChange={this.handleChange}
+                onChange={e => value.update({ cool: e.target.value })}
               />
             </div>
           </div>
@@ -32,6 +35,7 @@ const ImagesPage = () => {
                     //onClick={this.handleListClick.bind(this, item, i)}
                   >
                     <img
+                      src={bg}
                       style={{
                         backgroundImage: "url(" + item.urls.small + ")"
                       }}

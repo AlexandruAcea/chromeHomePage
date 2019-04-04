@@ -3,13 +3,17 @@ import React, { Component } from "react";
 import { UNSPLASH_ID } from "../types";
 
 class AppProvider extends Component {
-  state = {
-    photoList: [],
-    cool: "ace"
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      photoList: [],
+      cool: "ace"
+    };
+    this.update = cool => this.setState(cool);
+  }
 
   componentDidMount() {
-    this.getPicturesFromAPI("girl, x5");
+    this.getPicturesFromAPI("ferrari");
   }
 
   getPicturesFromAPI(query) {
@@ -26,8 +30,11 @@ class AppProvider extends Component {
   }
 
   render() {
+    const { update } = this;
+    const state = this.state;
+
     return (
-      <Context.Provider value={this.state}>
+      <Context.Provider value={{ state, update }}>
         {this.props.children}
       </Context.Provider>
     );

@@ -3,10 +3,13 @@ import React, { Component } from "react";
 import { UNSPLASH_ID } from "../types";
 
 class AppProvider extends Component {
-  state = { photoList: [] };
+  state = {
+    photoList: [],
+    cool: "ace"
+  };
 
   componentDidMount() {
-    this.getPicturesFromAPI("red umbrella girl x5");
+    this.getPicturesFromAPI("girl, x5");
   }
 
   getPicturesFromAPI(query) {

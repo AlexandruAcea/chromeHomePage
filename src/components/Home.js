@@ -1,89 +1,50 @@
-import React, { Component } from "react";
-import { UNSPLASH_ID } from "../types";
-import Cookies from "universal-cookie";
+import React, { useContext } from "react";
 import { withRouter } from "react-router-dom";
 import "../css/Home.css";
+import Context from "./Context";
 import gearIcon from "../assets/gear.svg";
 import Settings from "./Settings";
 
-const cookies = new Cookies();
+const Home = () => {
+  const value = useContext(Context);
+  const { showSettings, backgroundImage, photographer, link } = value.state;
+  const list = value.state.photoList.results;
 
-class Home extends Component {
-  state = {
-    query: "",
-    photoList: [],
-    backgroundImage: "../assets/photo1.jpg",
-    photographer: "",
-    link: "",
-    showSettings: false
-  };
-
-  componentDidMount() {
-    if (typeof cookies.get("queries") === "undefined")
-      this.props.history.push("/onboarding");
-    else this.getPicturesFromAPI(cookies.get("queries"));
+  function handleSettingsClick() {
+    value.setSettings({ showSettings: !showSettings });
   }
 
-  getPicturesFromAPI(query) {
-    fetch(
-      `https://api.unsplash.com/search/photos?client_id=${UNSPLASH_ID}&query=${query}`,
-      { method: "get" }
-    ).then(res =>
-      res.json().then(json => {
-        const data = json.results[2];
+  return (
+    <div
+      className="containerHome"
+      style={{
+        backgroundImage: "url(" + backgroundImage + ")"
+      }}
+    >
+      <div id="background" />
 
-        this.setState({
-          photoList: json,
-          backgroundImage: data.urls.full,
-          photographer: data.user.name,
-          link: data.user.links.html
-        });
-      })
-    );
-  }
+      <h1 id="quote">
+        "The only way to do great work is to love what you do."
+      </h1>
 
-  handleSettingsClick() {
-    const { showSettings } = this.state;
+      <Settings photoList={list} show={showSettings} />
 
-    if (!showSettings) {
-      this.setState({ showSettings: !showSettings });
-    } else this.setState({ showSettings: !showSettings });
-  }
+      <h1 id="titleMain">good morning, ace.</h1>
 
-  render() {
-    const { showSettings } = this.state;
-    return (
-      <div
-        className="containerHome"
-        style={{
-          backgroundImage: "url(" + this.state.backgroundImage + ")"
-        }}
-      >
-        <div id="background" />
-
-        <h1 id="quote">
-          "The only way to do great work is to love what you do."
-        </h1>
-
-        <Settings photoList={this.state.photoList} show={showSettings} />
-
-        <h1 id="titleMain">good morning, ace.</h1>
-
-        <div className="bottomLeft">
-          <h1 id="photographer">photographer</h1>
-          <a href={this.state.link}>
-            <p id="nameOfPhotographer">{this.state.photographer}</p>
-          </a>
-        </div>
-        <img
-          src={gearIcon}
-          id="gear"
-          alt="settings"
-          onClick={this.handleSettingsClick.bind(this)}
-        />
+      <div className="bottomLeft">
+        <h1 id="photographer">photographer</h1>
+        <a href={link}>
+          <p id="nameOfPhotographer">{photographer}</p>
+        </a>
       </div>
-    );
-  }
-}
+      <img
+        src={gearIcon}
+        id="gear"
+        alt="settings"
+        onClick={handleSettingsClick}
+      />
+    </div>
+  );
+};
 
 export default withRouter(Home);

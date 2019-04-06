@@ -1,15 +1,19 @@
 import React, { useContext } from "react";
 import Context from "../Context";
 import bg from "../../assets/transparent.png";
+import Cookies from "universal-cookie";
 
 const ImagesPage = () => {
   const value = useContext(Context);
-  console.log(value);
-
   const list = value.state.photoList.results;
+  const cookies = new Cookies();
+
+  function checkSelected(item) {
+    if (item.isSelected) return "photoListItemSelected";
+  }
 
   function renderList() {
-    if (typeof list !== "undefined")
+    if (typeof list !== "undefined") {
       return (
         <div>
           <div className="titlesx">
@@ -19,8 +23,11 @@ const ImagesPage = () => {
             <div className="tags">
               <input
                 type="text"
-                //value={this.state.value}
-                onChange={e => value.update({ cool: e.target.value })}
+                value={value.state.queries}
+                onChange={e => {
+                  value.refresh(e.target.value);
+                  cookies.set("queries", e.target.value, { path: "/" });
+                }}
               />
             </div>
           </div>
@@ -32,14 +39,28 @@ const ImagesPage = () => {
                   <li
                     key={i}
                     className="photoListItem"
-                    //onClick={this.handleListClick.bind(this, item, i)}
+                    onClick={() => {
+                      list.forEach(function(entry) {
+                        item.id === entry.id
+                          ? (entry.isSelected = true)
+                          : (entry.isSelected = false);
+                      });
+                      value.updateList(list);
+                      value.setBackground({ backgroundImage: item.urls.full });
+
+                      cookies.set("background", item.urls.full, { path: "/" });
+                    }}
                   >
-                    <img
-                      src={bg}
-                      style={{
-                        backgroundImage: "url(" + item.urls.small + ")"
-                      }}
-                    />
+                    <div>
+                      <img
+                        className={checkSelected(item)}
+                        alt=""
+                        src={bg}
+                        style={{
+                          backgroundImage: "url(" + item.urls.small + ")"
+                        }}
+                      />
+                    </div>
                   </li>
                 );
               })}
@@ -47,6 +68,7 @@ const ImagesPage = () => {
           </div>
         </div>
       );
+    }
   }
 
   return <div>{renderList()}</div>;

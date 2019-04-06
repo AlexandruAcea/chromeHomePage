@@ -72,6 +72,7 @@ h1 {
   width: 100%;
   overflow-y: scroll;
   column-count: 2;
+  min-width: 316px;
   min-height: 558px;
 }
 
@@ -93,6 +94,17 @@ h1 {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+
+.photoListItemSelected {
+  border: 1px white solid;
+}
+
+.photoListItem img:hover {
+  opacity: 0.7;
+  transition: 0.3s;
 }
 
 .tags {

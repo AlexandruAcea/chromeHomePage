@@ -40,10 +40,11 @@ const ImagesPage = () => {
                     key={i}
                     className="photoListItem"
                     onClick={() => {
-                      list.forEach(function(entry) {
-                        item.id === entry.id
-                          ? (entry.isSelected = true)
-                          : (entry.isSelected = false);
+                      list.forEach(function(entry, index) {
+                        if (item.id === entry.id) {
+                          entry.isSelected = true;
+                          cookies.set("selectedPhoto", index, { path: "/" });
+                        } else entry.isSelected = false;
                       });
                       value.updateList(list);
                       value.setBackground({ backgroundImage: item.urls.full });

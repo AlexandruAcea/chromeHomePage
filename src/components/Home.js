@@ -34,7 +34,7 @@ const Home = () => {
       <div className="bottomLeft">
         <h1 id="photographer">photographer</h1>
         <a href={link}>
-          <p id="nameOfPhotographer">{photographer}</p>
+          <p id="nameOfPhotographer">{photographer + " / Unsplash"}</p>
         </a>
       </div>
       <img

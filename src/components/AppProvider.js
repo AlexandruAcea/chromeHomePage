@@ -11,7 +11,7 @@ class AppProvider extends Component {
     super(props);
     this.state = {
       photoList: [],
-      selectedPhoto: 0,
+      selectedPhoto: cookies.get("selectedPhoto"),
       queries: cookies.get("queries"),
       backgroundImage: cookies.get("background"),
       photographer: "",
@@ -26,6 +26,9 @@ class AppProvider extends Component {
   }
 
   componentDidMount() {
+    if (typeof cookies.get("selectedPhoto") === "undefined")
+      cookies.set("selectedPhoto", 0, { path: "/" });
+
     if (typeof cookies.get("queries") === "undefined")
       this.props.history.push("/onboarding");
     else this.getPicturesFromAPI(this.state.queries);
@@ -35,7 +38,7 @@ class AppProvider extends Component {
     this.setState({ queries: query });
 
     fetch(
-      `https://api.unsplash.com/search/photos?client_id=${UNSPLASH_ID}&query=${query}&page=1`,
+      `https://api.unsplash.com/search/photos?client_id=${UNSPLASH_ID}&query=${query}&page=1&per_page=30`,
       { method: "get" }
     ).then(res =>
       res.json().then(json => {

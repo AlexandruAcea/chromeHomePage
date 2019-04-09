@@ -7,11 +7,27 @@ import Settings from "./Settings";
 
 const Home = () => {
   const value = useContext(Context);
-  const { showSettings, backgroundImage, photographer, link } = value.state;
+  const {
+    showSettings,
+    backgroundImage,
+    photographer,
+    link,
+    gear
+  } = value.state;
   const list = value.state.photoList.results;
 
   function handleSettingsClick() {
     value.setSettings({ showSettings: !showSettings });
+
+    if (gear === "gear") value.setGear({ gear: "gearShow" });
+    else value.setGear({ gear: "gear" });
+  }
+
+  function handleBackgroundClick() {
+    if (showSettings) {
+      value.setSettings({ showSettings: !showSettings });
+      value.setGear({ gear: "gear" });
+    }
   }
 
   return (
@@ -21,7 +37,7 @@ const Home = () => {
         backgroundImage: "url(" + backgroundImage + ")"
       }}
     >
-      <div id="background" />
+      <div id="background" onClick={handleBackgroundClick} />
 
       <h1 id="quote">
         "The only way to do great work is to love what you do."
@@ -39,7 +55,7 @@ const Home = () => {
       </div>
       <img
         src={gearIcon}
-        id="gear"
+        className={gear}
         alt="settings"
         onClick={handleSettingsClick}
       />

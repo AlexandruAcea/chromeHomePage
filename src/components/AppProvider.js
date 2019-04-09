@@ -16,18 +16,23 @@ class AppProvider extends Component {
       backgroundImage: cookies.get("background"),
       photographer: "",
       link: "",
-      showSettings: false
+      showSettings: false,
+      gear: "gear"
     };
     this.refresh = queries => this.getPicturesFromAPI(queries);
     this.setSettings = showSettings => this.setState(showSettings);
     this.setSelectedPhoto = selectedPhoto => this.setState(selectedPhoto);
     this.updateList = photoList => this.setState(photoList);
     this.setBackground = backgroundImage => this.setState(backgroundImage);
+    this.setGear = gear => this.setState(gear);
   }
 
   componentDidMount() {
     if (typeof cookies.get("selectedPhoto") === "undefined")
       cookies.set("selectedPhoto", 0, { path: "/" });
+
+    if (typeof cookies.get("background") === "undefined")
+      this.setState({ backgroundImage: background });
 
     if (typeof cookies.get("queries") === "undefined")
       this.props.history.push("/onboarding");
@@ -71,7 +76,8 @@ class AppProvider extends Component {
       setSettings,
       setSelectedPhoto,
       updateList,
-      setBackground
+      setBackground,
+      setGear
     } = this;
     const state = this.state;
 
@@ -83,7 +89,8 @@ class AppProvider extends Component {
           setSettings,
           setSelectedPhoto,
           updateList,
-          setBackground
+          setBackground,
+          setGear
         }}
       >
         {this.props.children}

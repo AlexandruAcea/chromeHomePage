@@ -47,6 +47,8 @@ class Settings extends Component {
       <div className={componentClasses.join(" ")}>
         <div className="contentRight">{this.handleListClickTest()}</div>
         <div className="contentLeft">
+          <p id="alexacea">@alexacea</p>
+
           <ul className="settingsList">
             {dataSet.map((item, i) => {
               return (
